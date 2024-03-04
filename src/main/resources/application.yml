@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/project8
+    username: postgres
+    password: 6574
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+
+cloudinary:
+  cloud_name: drfnzmkqf
+  api_key: 348329312131219
+  api_secret: RyMSRpJCI1vliEo5dfVICndpc6Y
