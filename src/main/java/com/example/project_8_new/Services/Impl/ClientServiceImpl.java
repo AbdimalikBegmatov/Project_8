@@ -1,5 +1,6 @@
 package com.example.project_8_new.Services.Impl;
 
+import com.example.project_8_new.Dto.ClientRequestDto;
 import com.example.project_8_new.Entity.Client;
 import com.example.project_8_new.Repositories.ClientRepository;
 import com.example.project_8_new.Services.ClientService;
@@ -27,5 +28,10 @@ public class ClientServiceImpl implements ClientService {
         );
 
         return new User(client.getEmail(), client.getPassword(), Collections.emptyList());
+    }
+
+    @Override
+    public Client create(ClientRequestDto clientRequestDto) {
+        return null;
     }
 }
