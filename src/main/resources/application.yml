@@ -12,7 +12,24 @@ spring:
     hibernate:
       ddl-auto: update
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: abdimalik.b@gmail.com
+    password: lplcqgbolilskzei
+    properties:
+      mail:
+        smtp:
+          auth: true
+        starttls:
+          enable: true
+
+jwt:
+  secret: 984hg493gh0439rthr0429uruj2309yh937gc763fe87t3f89723gf
+  lifetime: 30m
+
 cloudinary:
   cloud_name: drfnzmkqf
   api_key: 348329312131219
   api_secret: RyMSRpJCI1vliEo5dfVICndpc6Y
+

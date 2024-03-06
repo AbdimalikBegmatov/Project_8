@@ -37,15 +37,13 @@ public class ClientRequestDto {
     @NotNull(message = "не можеть быть null")
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     private LocalDate dateOfBirth;
-    private MultipartFile image;
 
-    public ClientRequestDto(String firstname, String lastname, String email, String password, String passwordConfirm, LocalDate dateOfBirth, MultipartFile image) {
+    public ClientRequestDto(String firstname, String lastname, String email, String password, String passwordConfirm, LocalDate dateOfBirth) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
         this.dateOfBirth = dateOfBirth;
-        this.image = image;
     }
 }
