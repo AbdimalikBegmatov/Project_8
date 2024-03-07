@@ -26,12 +26,12 @@ public class AuthController {
     public ResponseEntity<LoginResponseDto> register(@RequestBody ClientRequestDto clientRequestDto){
         return new ResponseEntity<>(authenticationService.register(clientRequestDto), HttpStatus.CREATED);
     }
-    @PostMapping("email-confirm/{id}")
+    @GetMapping("email-confirm/{id}")
     public ResponseEntity<HttpStatus> email_confirm(@PathVariable("id") String id){
         return new ResponseEntity<>(authenticationService.confirm_email(id),HttpStatus.OK);
     }
-    @PostMapping("forgot-password/{email}")
-    public ResponseEntity<String> forgot_password(@PathVariable("email")String email){
-        return null;
-    }
+//    @PostMapping("forgot-password/{email}")
+//    public ResponseEntity<String> forgot_password(@PathVariable("email")String email){
+//        return null;
+//    }
 }

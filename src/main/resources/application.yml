@@ -2,10 +2,12 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://viaduct.proxy.rlwy.net:20388/railway
+    password: 1*1GB2*Fe6cG5E5edgAeE6d2262Bf3ab
     username: postgres
+
 #    url: jdbc:postgresql://localhost:5432/project8
 #    password: 6574
-    password: 1*1GB2*Fe6cG5E5edgAeE6d2262Bf3ab
+
   jpa:
     show-sql: true
     properties:
@@ -14,17 +16,6 @@ spring:
     hibernate:
       ddl-auto: update
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: abdimalik.b@gmail.com
-    password: lplcqgbolilskzei
-    properties:
-      mail:
-        smtp:
-          auth: true
-        starttls:
-          enable: false
 
 jwt:
   secret: 984hg493gh0439rthr0429uruj2309yh937gc763fe87t3f89723gf

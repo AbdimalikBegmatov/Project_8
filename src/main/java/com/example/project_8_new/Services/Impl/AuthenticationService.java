@@ -7,7 +7,6 @@ import com.example.project_8_new.Entity.Client;
 import com.example.project_8_new.Exceptions.CustomEmailAlreadyExistsException;
 import com.example.project_8_new.Repositories.ClientRepository;
 import com.example.project_8_new.Utils.JwtTokenUtils;
-import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -86,7 +84,7 @@ public class AuthenticationService {
 
     @Transactional
     public HttpStatus confirm_email(String id) {
-        Client client = clientRepository.findByCodeConfirm(id);
+        Client client = clientRepository.findByCodeConfirm(id).orElseThrow(()->new CustomEmailAlreadyExistsException("Неправильня ссылыка подверждени или ссылка повреждена"));
         if (!client.getCodeConfirmBeginDate().isBefore(client.getCodeConfirmBeginDate().plusMinutes(5)) && !client.getCodeConfirm().equals(id)){
             throw  new CustomEmailAlreadyExistsException("Время для потверждение email истек или неправельный ссылка, отправьте заново");
         }
