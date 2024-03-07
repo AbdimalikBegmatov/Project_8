@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -26,12 +25,14 @@ public class JwtTokenUtils {
         claim.put("email",userDetails.getUsername());
 
         Date issuedDate = new Date();
+        Date expirationDate = new Date(issuedDate.getTime()+lifetime.toMillis());
+
 
         return Jwts.builder()
                 .claims(claim)
                 .subject(userDetails.getUsername())
-                .issuedAt(new Date())
-                .expiration(new Date(issuedDate.getTime()+lifetime.toMillis()))
+                .issuedAt(issuedDate)
+                .expiration(expirationDate)
                 .signWith(secretKey())
                 .compact();
 
