@@ -18,7 +18,7 @@ public class CustomBadCredentialException {
     public ResponseEntity<ApiError> handleBadCredentialsException(BadCredentialsException exception){
         Map<String, List<String>> errors = new HashMap<>();
 
-        errors.put("error",List.of(exception.getMessage()));
+        errors.put("error",List.of("Неправильный пароль или логин"));
 
         return new ResponseEntity<>(
                 new ApiError(

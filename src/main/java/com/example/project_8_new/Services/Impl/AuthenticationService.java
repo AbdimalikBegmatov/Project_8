@@ -80,7 +80,7 @@ public class AuthenticationService {
 
         emailService.sendEmail(client.getEmail(),
                 "Подвердите регистрацию",
-                String.format("Перейдите по ссылке для завершение регистрации \"%s\"",url));
+                String.format("<p>Перейдите по ссылке для завершение регистрации <a href=%s>Нажмите сюда</a></p>",url));
 
         return new LoginResponseDto(jwtTokenUtils.generateToken(client.getEmail()));
     }
@@ -123,7 +123,7 @@ public class AuthenticationService {
 
         emailService.sendEmail(result.getEmail(),
                 "Подвердите регистрацию",
-                String.format("Перейдите по ссылке для завершение регистрации %s",url));
+                String.format("<p>Перейдите по ссылке для завершение регистрации <a href=%s>Нажмите сюда</a></p>",url));
 
 
         return HttpStatus.OK;
