@@ -8,17 +8,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class CustomArgumentValidException {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleValidException(MethodArgumentNotValidException exception){
-        Map<String,String> errors = new HashMap<>();
 
-        exception.getBindingResult().getAllErrors().forEach(error->{
-            errors.put(((FieldError)error).getField(),error.getDefaultMessage());
+        Map<String, List<String>> errors = new HashMap<>();
+        List<String> message = new ArrayList<>();
+
+        exception.getBindingResult().getAllErrors().forEach((error)->{
+            String fieldname = ((FieldError)error).getField();
+            message.add(error.getDefaultMessage());
+            errors.put(fieldname,message);
         });
 
         return new ResponseEntity<>(

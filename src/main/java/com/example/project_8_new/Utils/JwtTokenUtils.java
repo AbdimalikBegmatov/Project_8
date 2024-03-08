@@ -19,10 +19,10 @@ public class JwtTokenUtils {
     @Value("${jwt.lifetime}")
     private Duration lifetime;
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(String email){
         Map<String,Object> claim = new HashMap<>();
 
-        claim.put("email",userDetails.getUsername());
+        claim.put("email",email);
 
         Date issuedDate = new Date();
         Date expirationDate = new Date(issuedDate.getTime()+lifetime.toMillis());
@@ -30,7 +30,7 @@ public class JwtTokenUtils {
 
         return Jwts.builder()
                 .claims(claim)
-                .subject(userDetails.getUsername())
+                .subject(email)
                 .issuedAt(issuedDate)
                 .expiration(expirationDate)
                 .signWith(secretKey())

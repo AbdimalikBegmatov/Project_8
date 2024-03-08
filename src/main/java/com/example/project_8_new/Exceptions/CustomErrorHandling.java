@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ControllerAdvice
-public class CustomEmailAlreadyExistsHandling {
-    @ExceptionHandler(CustomEmailAlreadyExistsException.class)
-    public ResponseEntity<ApiError> handleEmailAlreadyExists(CustomEmailAlreadyExistsException ex){
-        Map<String,String> errors = new HashMap<>();
+public class CustomErrorHandling {
+    @ExceptionHandler(CustomErrorException.class)
+    public ResponseEntity<ApiError> handleError(CustomErrorException ex){
+        Map<String, List<String>> errors = new HashMap<>();
 
-        errors.put("error", ex.getMessage());
+        errors.put("error", List.of(ex.getMessage()));
 
         return new ResponseEntity<>(
                 new ApiError(

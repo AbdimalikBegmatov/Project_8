@@ -1,12 +1,12 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://viaduct.proxy.rlwy.net:20388/railway
-    password: 1*1GB2*Fe6cG5E5edgAeE6d2262Bf3ab
+#    url: jdbc:postgresql://viaduct.proxy.rlwy.net:20388/railway
+#    password: 1*1GB2*Fe6cG5E5edgAeE6d2262Bf3ab
     username: postgres
 
-#    url: jdbc:postgresql://localhost:5432/project8
-#    password: 6574
+    url: jdbc:postgresql://localhost:5432/project8
+    password: 6574
 
   jpa:
     show-sql: true
@@ -15,6 +15,7 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: update
+    open-in-view: false
 
 
 jwt:

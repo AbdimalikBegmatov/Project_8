@@ -25,15 +25,14 @@ public class ClientRequestDto {
     private String email;
     @Pattern.List({
             @Pattern(regexp = ".{8,15}", message = "От 8 до 15 символов"),
-            @Pattern(regexp = "(?=.*[0-9])", message = "Минимум 1 цифра"),
-            @Pattern(regexp = "(?=.*[@#$%^&+=!])", message = "Минимум 1 спецсимвол (!,\",#,$...)"),
-            @Pattern(regexp = "(?=.*[a-z]),(?=.*[A-Z])", message = "Строчные и прописные буквы")
+            @Pattern(regexp = ".*[0-9]", message = "Минимум 1 цифра"),
+            @Pattern(regexp = ".*[@#$%^&+=!].*", message = "Минимум 1 спецсимвол (!,',#,$...)"),
+            @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z]).*", message = "Строчные и прописные буквы")
     })
     private String password;
     @NotBlank(message = "Не может быть пустым")
     @NotNull(message = "не можеть быть null")
     private String passwordConfirm;
-    @NotBlank(message = "Не может быть пустым")
     @NotNull(message = "не можеть быть null")
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     private LocalDate dateOfBirth;

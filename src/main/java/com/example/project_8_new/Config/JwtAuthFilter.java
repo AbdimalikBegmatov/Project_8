@@ -1,7 +1,10 @@
 package com.example.project_8_new.Config;
 
+import com.example.project_8_new.Exceptions.CustomErrorException;
 import com.example.project_8_new.Services.ClientService;
 import com.example.project_8_new.Utils.JwtTokenUtils;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,7 +48,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
-        userEmail = jwtTokenUtils.getUserEmail(jwt);
+        try {
+            userEmail = jwtTokenUtils.getUserEmail(jwt);
+        } catch (ExpiredJwtException | SignatureException e){
+            throw new CustomErrorException("Ошибка проверки токена, время жизни истек или не правильный токен");
+        }
+
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
 
@@ -57,11 +65,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         null,
                         Collections.emptyList()
                 );
-
                 authenticationToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
-
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }

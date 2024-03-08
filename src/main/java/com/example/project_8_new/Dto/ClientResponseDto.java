@@ -13,12 +13,21 @@ public class ClientResponseDto {
     private String firstname;
     private String lastname;
     private String email;
-    private String password;
     private LocalDate dateOfBirth;
     private String image;
-    private String codeConfirm;
-    private LocalDateTime codeConfirmBeginDate;
     private Boolean isActivate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public ClientResponseDto(String id, String firstname, String lastname, String email, LocalDate dateOfBirth, String image, Boolean isActivate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.image = image;
+        this.isActivate = isActivate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }
