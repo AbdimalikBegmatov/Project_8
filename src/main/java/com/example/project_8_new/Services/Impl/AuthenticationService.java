@@ -7,6 +7,7 @@ import com.example.project_8_new.Entity.Client;
 import com.example.project_8_new.Exceptions.CustomErrorException;
 import com.example.project_8_new.Repositories.ClientRepository;
 import com.example.project_8_new.Utils.JwtTokenUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +27,8 @@ public class AuthenticationService {
     private final ClientRepository clientRepository;
     private final EmailService emailService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Value("${confirm_url}")
+    private String urlToConfirm;
 
     public AuthenticationService(JwtTokenUtils jwtTokenUtils, AuthenticationManager authenticationManager, ClientRepository clientRepository, EmailService emailService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.jwtTokenUtils = jwtTokenUtils;
@@ -51,6 +54,7 @@ public class AuthenticationService {
     public LoginResponseDto register(ClientRequestDto clientRequestDto){
         String defaultPhoto = "https://res.cloudinary.com/drfnzmkqf/image/upload/v1709743707/istockphoto-1337144146-2048x2048_llzyxc.jpg";
         Boolean result = clientRepository.existsByEmail(clientRequestDto.getEmail());
+
         if (result){
             throw new CustomErrorException(String.format("Email of {%s} already exists",clientRequestDto.getEmail()));
         }
@@ -60,7 +64,6 @@ public class AuthenticationService {
         }
 
         String uuid = UUID.randomUUID().toString();
-        String url = "http:/localhost:8080/api/v1/auth/email-confirm/"+uuid;
 
         Client client = new Client(
                 clientRequestDto.getFirstname(),
@@ -80,7 +83,7 @@ public class AuthenticationService {
 
         emailService.sendEmail(client.getEmail(),
                 "Подвердите регистрацию",
-                String.format("<p>Перейдите по ссылке для завершение регистрации <a href=%s>Нажмите сюда</a></p>",url));
+                String.format("<p>Перейдите по ссылке для завершение регистрации <a href=%s>Нажмите сюда</a></p>",urlToConfirm+uuid));
 
         return new LoginResponseDto(jwtTokenUtils.generateToken(client.getEmail()));
     }
@@ -113,7 +116,6 @@ public class AuthenticationService {
             throw  new CustomErrorException("Вы уже активировали ссылку, нет надобности повторной активации");
         }
         String uuid = UUID.randomUUID().toString();
-        String url = "http:/localhost:8080/api/v1/auth/email-confirm/"+uuid;
 
         client.setCodeConfirm(uuid);
         client.setCodeConfirmBeginDate(LocalDateTime.now());
@@ -123,7 +125,7 @@ public class AuthenticationService {
 
         emailService.sendEmail(result.getEmail(),
                 "Подвердите регистрацию",
-                String.format("<p>Перейдите по ссылке для завершение регистрации <a href=%s>Нажмите сюда</a></p>",url));
+                String.format("<p>Перейдите по ссылке для завершение регистрации <a href=%s>Нажмите сюда</a></p>",urlToConfirm+uuid));
 
 
         return HttpStatus.OK;
