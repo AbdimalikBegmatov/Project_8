@@ -47,10 +47,8 @@ public class ClientServiceImpl implements ClientService {
 
         return new ClientResponseDto(
                 client.getId(),
-                client.getFirstname(),
-                client.getLastname(),
+                client.getLogin(),
                 client.getEmail(),
-                client.getDateOfBirth(),
                 client.getImage(),
                 client.getIsActivate(),
                 client.getCreatedAt(),
@@ -87,10 +85,8 @@ public class ClientServiceImpl implements ClientService {
 
         return new ClientResponseDto(
                 result.getId(),
-                result.getFirstname(),
-                result.getLastname(),
+                result.getLogin(),
                 result.getEmail(),
-                result.getDateOfBirth(),
                 result.getImage(),
                 result.getIsActivate(),
                 result.getCreatedAt(),

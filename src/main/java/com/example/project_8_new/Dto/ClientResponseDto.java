@@ -10,21 +10,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ClientResponseDto {
     private String id;
-    private String firstname;
-    private String lastname;
+    private String login;
     private String email;
-    private LocalDate dateOfBirth;
     private String image;
     private Boolean isActivate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public ClientResponseDto(String id, String firstname, String lastname, String email, LocalDate dateOfBirth, String image, Boolean isActivate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ClientResponseDto(String id,String login, String email, String image, Boolean isActivate, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.login = login;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
         this.image = image;
         this.isActivate = isActivate;
         this.createdAt = createdAt;

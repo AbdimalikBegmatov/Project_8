@@ -16,11 +16,7 @@ import java.time.LocalDate;
 public class ClientRequestDto {
     @NotBlank(message = "Не может быть пустым")
     @NotNull(message = "не можеть быть null")
-    private String firstname;
-
-    @NotBlank(message = "Не может быть пустым")
-    @NotNull(message = "не можеть быть null")
-    private String lastname;
+    private String login;
     @Email(message = "Должна быть электронный почтой example@example.com")
     private String email;
     @Pattern.List({
@@ -33,16 +29,11 @@ public class ClientRequestDto {
     @NotBlank(message = "Не может быть пустым")
     @NotNull(message = "не можеть быть null")
     private String passwordConfirm;
-    @NotNull(message = "не можеть быть null")
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
-    private LocalDate dateOfBirth;
 
-    public ClientRequestDto(String firstname, String lastname, String email, String password, String passwordConfirm, LocalDate dateOfBirth) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public ClientRequestDto(String login, String email, String password, String passwordConfirm) {
+        this.login = login;
         this.email = email;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
-        this.dateOfBirth = dateOfBirth;
     }
 }

@@ -21,10 +21,8 @@ public class Client implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @Column(name = "firstname",nullable = false)
-    private String firstname;
-    @Column(name = "lastname",nullable = false)
-    private String lastname;
+    @Column(name = "login",nullable = false)
+    private String login;
     @Column(name = "email",nullable = false,unique = true)
     private String email;
     @Column(name = "password",nullable = false)
@@ -51,9 +49,8 @@ public class Client implements UserDetails {
         isActivate = false;
     }
 
-    public Client(String firstname, String lastname, String email, String password, LocalDate dateOfBirth, String image, LocalDateTime updatedAt) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Client(String login,String email, String password, LocalDate dateOfBirth, String image, LocalDateTime updatedAt) {
+        this.login = login;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;

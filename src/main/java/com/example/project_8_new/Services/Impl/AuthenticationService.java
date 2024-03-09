@@ -16,7 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -66,11 +68,10 @@ public class AuthenticationService {
         String uuid = UUID.randomUUID().toString();
 
         Client client = new Client(
-                clientRequestDto.getFirstname(),
-                clientRequestDto.getLastname(),
+                clientRequestDto.getLogin(),
                 clientRequestDto.getEmail(),
                 bCryptPasswordEncoder.encode(clientRequestDto.getPassword()),
-                clientRequestDto.getDateOfBirth(),
+                LocalDate.of(2000,1,1),
                 defaultPhoto,
                 LocalDateTime.now()
         );
